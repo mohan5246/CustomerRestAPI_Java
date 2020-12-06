@@ -2,6 +2,7 @@ package com.example.customer.customersearch.service.exception;
 
 import java.io.Serializable;
 
+@SuppressWarnings("rawtypes")
 public class Error implements Serializable {
 
 	/**
@@ -11,14 +12,16 @@ public class Error implements Serializable {
 
 	private String errorCode;
 	private String errorMsg;
+	private Class errorClass;
 
 	public Error() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Error(String errorCode, String errorMsg) {
+	public Error(String errorCode, String errorMsg, Class errorClass) {
 		this.errorCode = errorCode;
 		this.errorMsg = errorMsg;
+		this.errorClass = errorClass;
 	}
 
 	public String getErrorCode() {
@@ -37,9 +40,12 @@ public class Error implements Serializable {
 		this.errorMsg = errorMsg;
 	}
 
-	@Override
-	public String toString() {
-		return "Error [errorCode=" + errorCode + ", errorMsg=" + errorMsg + "]";
+	public Class getErrorClass() {
+		return errorClass;
+	}
+
+	public void setErrorClass(Class errorClass) {
+		this.errorClass = errorClass;
 	}
 
 }
