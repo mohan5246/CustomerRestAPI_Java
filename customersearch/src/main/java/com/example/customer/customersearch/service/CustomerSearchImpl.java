@@ -8,6 +8,8 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
 import com.example.customer.customersearch.model.Customer;
+import com.example.customer.customersearch.service.exception.Error;
+import com.example.customer.customersearch.service.exception.ExceptionHandler;
 
 public class CustomerSearchImpl {
 
@@ -30,7 +32,9 @@ public class CustomerSearchImpl {
 			return Response.status(Status.OK).entity(new GenericEntity<Customer>(service.getCustomerById(custId)) {
 			}).build();
 		} catch (Exception e) {
-			return Response.status(Status.NOT_FOUND).build();
+			e.printStackTrace();
+			System.out.println("Error"+e.getMessage());
+			return new ExceptionHandler(new Error("ERR_001", "Data Not Found")).toResponse(e);
 		}
 
 	}
